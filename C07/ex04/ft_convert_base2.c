@@ -48,9 +48,13 @@ int	search_base(char c, char *base)
 	int	i;
 
 	i = 0;
-	while (base[i] != c)
+	while (base[i] != '\0')
+    {
+        if (base[i] == c)
+            return (i);
 		i++;
-	return (i);
+    }
+	return (0);
 }
 
 int	ft_power(int nb, int power)
@@ -70,4 +74,18 @@ int	ft_power(int nb, int power)
 		i++;
 	}
 	return (nb);
+}
+
+int is_space(char c)
+{
+    if ((9 <= c && c <= 13) || c == 32)
+        return (1);
+    return (0);
+}
+
+int is_alphanum(char c)
+{
+    if ((48 <= c && c <= 57) || (65 <= c && c <= 90) || (97 <= c && c <= 122))
+        return (1);
+    return (0);
 }

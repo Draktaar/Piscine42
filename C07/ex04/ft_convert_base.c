@@ -16,10 +16,34 @@
 
 char base_dec[] = "0123456789";
 
+int is_alphanum(char c);
 int ft_strlen(char *str);
-int ft_nbrlen(int nbr, int div);
+int	ft_nblen(int nb, int div);
 int	ft_power(int nbr, int power);
-int ft_index_base(char c, char *base);
+int	search_base(char c, char *base);
+
+
+int ft_checkbase(char *base)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (base[i] != '\0')
+    {
+        j = i + 1;
+        if (!is_alphanum(base[i]))
+            return (0);
+        while (base[j] != '\0')
+        {
+            if (base[j] == base[i])
+                return (0);
+            j++;
+        }
+        i++;
+    }
+    return (1);
+}
 
 int ft_convert_dec_base(char *nbr, char *base)
 {
@@ -63,7 +87,19 @@ char *ft_convert_any_base(int nbr, char *base_to)
 
 char *ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
+    int i;
     char *converted_base;
+
+    i = 0;
+    if (!ft_checkbase(base_from) || !ft_checkbase(base_to))
+        return (NULL);
+    while (nbr[i] != '\0')
+    {
+        if (!search_base(nbr[i], base_from))
+            return ("");
+        i++;
+    }
+
     converted_base = ft_convert_any_base(ft_convert_dec_base(nbr, base_from), base_to);
     return (converted_base);
 }
@@ -71,7 +107,7 @@ char *ft_convert_base(char *nbr, char *base_from, char *base_to)
 int main(int argc, char const *argv[])
 {
     char *test;
-    test = ft_convert_base("213323", "01234", "0123456789ABCDEF");
+    test = ft_convert_base("1010", "01", "0123456789ABCDEF");
     printf("%s", test);
     return 0;
 }
