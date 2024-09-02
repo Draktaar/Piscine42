@@ -6,7 +6,7 @@
 /*   By: achu <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:09:58 by achu              #+#    #+#             */
-/*   Updated: 2024/08/31 23:58:39 by achu             ###   ########.fr       */
+/*   Updated: 2024/09/02 16:21:00 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int	search_base(char c, char *base)
 
 	i = 0;
 	while (base[i] != '\0')
-    {
-        if (base[i] == c)
-            return (i);
+	{
+		if (base[i] == c)
+			return (i);
 		i++;
-    }
-	return (0);
+	}
+	return (-1);
 }
 
 int	ft_power(int nb, int power)
@@ -76,16 +76,27 @@ int	ft_power(int nb, int power)
 	return (nb);
 }
 
-int is_space(char c)
+int	ft_checkbase(char *base)
 {
-    if ((9 <= c && c <= 13) || c == 32)
-        return (1);
-    return (0);
-}
+	int	i;
+	int	j;
 
-int is_alphanum(char c)
-{
-    if ((48 <= c && c <= 57) || (65 <= c && c <= 90) || (97 <= c && c <= 122))
-        return (1);
-    return (0);
+	while (base[i] != '\0')
+	{
+		j = i + 1;
+		if (!((48 <= base[i] && base[i] <= 57)
+				|| (65 <= base[i] && base[i] <= 90)
+				|| (97 <= base[i] && base[i] <= 122)))
+			return (0);
+		while (base[j] != '\0')
+		{
+			if (base[j] == base[i])
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	if (i <= 1)
+		return (0);
+	return (1);
 }

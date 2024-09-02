@@ -6,7 +6,7 @@
 /*   By: achu <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:27:42 by achu              #+#    #+#             */
-/*   Updated: 2024/08/30 21:15:51 by achu             ###   ########.fr       */
+/*   Updated: 2024/09/02 21:16:17 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,40 +48,31 @@ char	*ft_strjoin(int size, char *strs[], char *sep)
 	int		len;
 	char	*cat;
 
-	if (size <= 0)
-		return (cat);
-	i = 0;
-	len = 0;
-	cat = (char *) malloc((my_alloclen(size, strs, sep) + 1) * sizeof(char));
-	while (i < size)
+	i = -1;
+	len = -1;
+	cat = (char *)malloc((my_alloclen(size, strs, sep) + 1) * sizeof(char));
+	while (++i < size)
 	{
 		j = -1;
 		while (++j < my_strjlen(strs[i]))
-		{
-			cat[len] = strs[i][j];
-			len++;
-		}
+			cat[++len] = strs[i][j];
 		if (i < size - 1)
 		{
-        	j = -1;
+			j = -1;
 			while (++j < my_strjlen(sep))
-			{
-				cat[len] = sep[j];
-				len++;
-			}
+				cat[++len] = sep[j];
 		}
-		i++;
 	}
-	cat[len] = '\0';
+	cat[++len] = '\0';
 	return (cat);
 }
 
-int main()
+int	main(void)
 {
-    char *str[] = { "", "Hello", "", "world"};
-    char sep[] = "-";
-    char *test;
+	char *str[] = { "", "Hello", "", "world"};
+	char sep[] = "-";
+	char *test;
 
-    test = ft_strjoin(4, str, sep);
-    printf("%s",  test);
+	test = ft_strjoin(0, str, sep);
+	printf("%s",  test);
 }

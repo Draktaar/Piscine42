@@ -108,8 +108,8 @@ char	**ft_split(char *str, char *charset)
 int main()
 {
     char **split;
-    char test[] = "20:twenty\n50:fifty";
-    char sep[] = ":\n";
+    char test[] = "       20       fifty            ";
+    char sep[] = "";
 
     split = ft_split(test, sep);
     for (int i = 0; split[i] != 0; i++)

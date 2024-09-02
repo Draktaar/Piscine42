@@ -6,7 +6,7 @@
 /*   By: achu <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 11:50:01 by achu              #+#    #+#             */
-/*   Updated: 2024/08/22 19:28:47 by achu             ###   ########.fr       */
+/*   Updated: 2024/09/02 14:52:19 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ int	ft_iterative_power(int nb, int power)
 }
 // int main(void)
 // {
-// 	printf("%i", ft_iterative_power(3, 3));
+//	printf("%i", ft_iterative_power(-6, 5));
 // }
