@@ -15,9 +15,9 @@
 
 int	is_math(char c)
 {
-	if (58 > c || c < 32)
-		return (0);
-	return (1);
+	if (32 < c && c < 58)
+		return (1);
+	return (0);
 }
 
 int	is_num(char c)
@@ -29,7 +29,7 @@ int	is_num(char c)
 
 int is_space(char c)
 {
-    if (9 <= c && c <= 13)
+    if ((9 <= c && c <= 13) || c == 32)
         return (1);
     return (0);
 }
@@ -43,12 +43,14 @@ int	ft_atoi(char *str)
 	i = 0;
 	nbr = 0;
 	sign = 1;
-	while (str[i] != '\0' && !is_math(str[i]))
+	while (is_space(str[i]))
+		i++;
+	while (str[i] != '\0' && is_math(str[i]))
 	{
+		if (str[i] == '-')
+			sign *= -1;
 		if (is_num(str[i]))
 			nbr = nbr * 10 + (str[i] - 48);
-		if (str[i] == 45)
-			sign *= -1;
 		i++;
 	}
 	return (nbr * sign);

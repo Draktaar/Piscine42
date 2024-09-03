@@ -13,44 +13,59 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int	base_type(char *base)
+int ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+int	search_base(char c, char *base)
 {
 	int	i;
 
 	i = 0;
 	while (base[i] != '\0')
+	{
+		if (base[i] == c)
+			return (i);
 		i++;
-	return (i);
-}
-
-void	putnbr_dec(int nb)
-{
-	char	c;
-
-	if (nb == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return ;
 	}
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		nb = -nb;
-	}
-	if (nb < 10)
-	{
-		c = nb + '0';
-		write(1, &c, 1);
-	}
-	else
-	{
-		putnbr_dec(nb / 10);
-		putnbr_dec(nb % 10);
-	}
+	return (-1);
 }
 
 void	ft_putnbr_base(int nbr, char *base)
 {
-	if (base_type(base) == 10)
-		putnbr_dec(nbr);
+	char c;
+	char div;
+
+	div = ft_strlen(base);
+	if (nbr == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return ;
+	}
+	if (nbr < 0)
+	{
+		write(1, "-", 1);
+		nbr = -nbr;
+	}
+	if (nbr < div)
+	{
+		c = base[nbr];
+		write(1, &c, 1);
+	}
+	else
+	{
+		ft_putnbr_base(nbr / div, base);
+		ft_putnbr_base(nbr % div, base);
+	}
+}
+
+int main ()
+{
+	ft_putnbr_base(12314, "0123456789");
 }
