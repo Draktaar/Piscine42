@@ -81,6 +81,7 @@ int	ft_checkbase(char *base)
 	int	i;
 	int	j;
 
+	i = 0;
 	while (base[i] != '\0')
 	{
 		j = i + 1;

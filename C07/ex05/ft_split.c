@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_is_charset(char c, char *charset)
+int	ft_check_charset(char c, char *charset)
 {
 	int	i;
 
@@ -31,89 +31,82 @@ int	ft_is_charset(char c, char *charset)
 int	ft_len_array(char *str, char *charset)
 {
 	int	i;
-	int	is_set;
 	int	count;
 
 	i = 0;
-	is_set = 0;
-	count = 1;
+	count = 0;
 	while (str[i] != '\0')
 	{
-		if (ft_is_charset(str[i], charset) && !is_set)
-		{
+		while (str[i] != '\0' && ft_check_charset(str[i], charset))
+			i++;
+		if (str[i] != '\0')
 			count++;
-			is_set = 1;
-		}
-		else if (!ft_is_charset(str[i], charset) && is_set)
-			is_set = 0;
-		i++;
+		while (str[i] != '\0' && !ft_check_charset(str[i], charset))
+			i++;
 	}
 	return (count);
 }
 
-char	*ft_alloc(char *start, char *end)
+int	ft_memo_len(char *str, char *charset)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0' && !ft_check_charset(str[i], charset))
+		i++;
+	return (i);
+}
+
+char	*ft_alloc(char *str, char *charset)
 {
 	int		i;
 	int		len;
 	char	*memo;
 
 	i = 0;
-	len = end - start;
+	len = ft_memo_len(str, charset);
 	memo = (char *)malloc ((len + 1) * sizeof(char));
 	while (i < len)
 	{
-		memo[i] = start[i];
+		memo[i] = str[i];
 		i++;
 	}
 	memo[i] = '\0';
 	return (memo);
 }
 
-void	ft_end(char **split, char *temp, char *str, int i)
-{
-	if (temp)
-		split[i] = ft_alloc(temp, str);
-	split[++i] = 0;
-}
-
 char	**ft_split(char *str, char *charset)
 {
 	int		i;
-	int		is_set;
-	char	*temp;
 	char	**split;
 
 	i = 0;
-	is_set = 1;
 	split = (char **)malloc ((ft_len_array(str, charset) + 1) * sizeof(char *));
 	while (*str)
 	{
-		if (ft_is_charset(*str, charset) && !is_set)
+		while (*str != '\0' && ft_check_charset(*str, charset))
+			str++;
+		if (*str != '\0')
 		{
-			split[i++] = ft_alloc(temp, str);
-			is_set = 1;
-			temp = NULL;
+			split[i] = ft_alloc(str, charset);
+			i++;
 		}
-		else if (!ft_is_charset(*str, charset) && is_set)
-		{
-			is_set = 0;
-			temp = str;
-		}
-		str++;
+		while (*str != '\0' && !ft_check_charset(*str, charset))
+			str++;
 	}
-	ft_end(split, temp, str, i);
+	split[i] = 0;
 	return (split);
 }
 
-int main()
-{
-    char **split;
-    char test[] = "       20       fifty            ";
-    char sep[] = "";
+// int main()
+// {
+//     char **split;
+//     char test[] ="              test          es         ";
+//     char sep[] = " ";
 
-    split = ft_split(test, sep);
-    for (int i = 0; split[i] != 0; i++)
-    {
-        printf("%s\n", split[i]);
-    }
-}
+//     split = ft_split(test, sep);
+//     for (int i = 0; split[i] != 0; i++)
+//     {
+//         printf("%s\n", split[i]);
+//     }
+// }

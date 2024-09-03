@@ -67,12 +67,12 @@ char	*ft_strjoin(int size, char *strs[], char *sep)
 	return (cat);
 }
 
-int	main(void)
-{
-	char *str[] = { "", "Hello", "", "world"};
-	char sep[] = "-";
-	char *test;
+// int	main(void)
+// {
+// 	char *str[] = { "", "Hello", "", "world"};
+// 	char sep[] = "-";
+// 	char *test;
 
-	test = ft_strjoin(0, str, sep);
-	printf("%s",  test);
-}
+// 	test = ft_strjoin(0, str, sep);
+// 	printf("%s",  test);
+// }

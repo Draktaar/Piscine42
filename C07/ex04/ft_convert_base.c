@@ -24,12 +24,10 @@ char	*ft_totoa(char *str, char *base)
 {
 	int		i;
 	int		j;
-	int		temp;
 	char	*itoa;
 
 	i = 0;
 	j = 0;
-	temp = 1;
 	itoa = malloc(1000 * sizeof(char));
 	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32
 		|| (str[i] == 43 || str[i] == 45))
@@ -131,11 +129,12 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	return (converted_base);
 }
 
-// int	main(int argc, char const *argv[])
+// int	main(void)
 // {
 // 	char	*test;
+// 	int i = 0;
 
-// 	test = ft_convert_base("-----1010", "01", "0123456789ABCDEF");
+// 	test = ft_convert_base("42", "0123456789", "5");
 // 	printf("%s", test);
 // 	return (0);
 // }
