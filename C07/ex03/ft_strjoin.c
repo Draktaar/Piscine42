@@ -73,6 +73,6 @@ char	*ft_strjoin(int size, char *strs[], char *sep)
 // 	char sep[] = "-";
 // 	char *test;
 
-// 	test = ft_strjoin(0, str, sep);
+// 	test = ft_strjoin(2, str, sep);
 // 	printf("%s",  test);
 // }

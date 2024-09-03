@@ -85,9 +85,7 @@ int	ft_checkbase(char *base)
 	while (base[i] != '\0')
 	{
 		j = i + 1;
-		if (!((48 <= base[i] && base[i] <= 57)
-				|| (65 <= base[i] && base[i] <= 90)
-				|| (97 <= base[i] && base[i] <= 122)))
+		if ((9 <= base[i] && base[i] <= 13) || base[i] == 32)
 			return (0);
 		while (base[j] != '\0')
 		{

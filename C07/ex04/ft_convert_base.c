@@ -6,7 +6,7 @@
 /*   By: achu <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:09:03 by achu              #+#    #+#             */
-/*   Updated: 2024/09/02 21:10:29 by achu             ###   ########.fr       */
+/*   Updated: 2024/09/03 17:20:23 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ char	*ft_totoa(char *str, char *base)
 	i = 0;
 	j = 0;
 	itoa = malloc(1000 * sizeof(char));
-	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32
-		|| (str[i] == 43 || str[i] == 45))
+	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
+		i++;
+	while (str[i] == 45 || str[i] == 43)
 		i++;
 	while (search_base(str[i], base) != -1)
 	{
@@ -73,7 +74,7 @@ char	*ft_convert_any_base(long nbr, char *base_to)
 	base = (char *)malloc ((len + 1) * sizeof(char));
 	if (nbr == 0)
 	{
-		base[0] = '0';
+		base[0] = base_to[0];
 		return (base);
 	}
 	while (0 < nbr)
@@ -88,21 +89,23 @@ char	*ft_convert_any_base(long nbr, char *base_to)
 	return (base);
 }
 
-char	*ft_sign(char *nbr, char *str)
+char	*ft_sign(char *nbr, char *str, char *base_to)
 {
 	int		i;
 	int		sign;
 	char	*result;
 
-	i = -1;
+	i = 0;
 	sign = 1;
-	while (!((48 <= nbr[i] && nbr[i] <= 57) || (65 <= nbr[i] && nbr[i] <= 90)
-			|| (97 <= nbr[i] && nbr[i] <= 122)))
+	while ((9 <= nbr[i] && nbr[i] <= 13) || nbr[i] == 32)
+		i++;
+	while (nbr[i] == 45 || nbr[i] == 43)
 	{
-		if (nbr[++i] == 45)
+		if (nbr[i] == 45)
 			sign *= -1;
+		i++;
 	}
-	if (sign < 0 && str[0] != '0')
+	if (sign < 0 && str[0] != base_to[0])
 	{
 		i = -1;
 		result = (char *)malloc ((1 + ft_strlen(str) + 1) * sizeof(char));
@@ -125,7 +128,7 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	totoa = ft_totoa(nbr, base_from);
 	converted_base = ft_convert_any_base(
 			ft_convert_dec_base(totoa, base_from), base_to);
-	converted_base = ft_sign(nbr, converted_base);
+	converted_base = ft_sign(nbr, converted_base, base_to);
 	return (converted_base);
 }
 
@@ -134,7 +137,7 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 // 	char	*test;
 // 	int i = 0;
 
-// 	test = ft_convert_base("42", "0123456789", "5");
+// 	test = ft_convert_base( " ---+~", "i~pv", "gw");
 // 	printf("%s", test);
 // 	return (0);
 // }
