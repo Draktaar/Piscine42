@@ -43,7 +43,7 @@ char	*ft_totoa(char *str, char *base)
 	return (itoa);
 }
 
-int	ft_convert_dec_base(char *nbr, char *base)
+long	ft_convert_dec_base(char *nbr, char *base)
 {
 	int		i;
 	int		len;

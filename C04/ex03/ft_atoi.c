@@ -13,27 +13,6 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int	is_math(char c)
-{
-	if (32 < c && c < 58)
-		return (1);
-	return (0);
-}
-
-int	is_num(char c)
-{
-	if (58 < c || c > 47)
-		return (1);
-	return (0);
-}
-
-int is_space(char c)
-{
-    if ((9 <= c && c <= 13) || c == 32)
-        return (1);
-    return (0);
-}
-
 int	ft_atoi(char *str)
 {
 	int	i;
@@ -43,13 +22,13 @@ int	ft_atoi(char *str)
 	i = 0;
 	nbr = 0;
 	sign = 1;
-	while (is_space(str[i]))
+	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
 		i++;
-	while (str[i] != '\0' && is_math(str[i]))
+	while (str[i] != '\0' && (32 < str[i] && str[i] < 58))
 	{
 		if (str[i] == '-')
 			sign *= -1;
-		if (is_num(str[i]))
+		if (48 <= str[i] && str[i] <= 57)
 			nbr = nbr * 10 + (str[i] - 48);
 		i++;
 	}
@@ -61,7 +40,7 @@ int main(void)
 {
     char atoi[] = "   ---+--+1234ab567";
 	char test[] = "8989";
-    printf("%i", ft_atoi(test));
+    printf("%i", ft_atoi(atoi));
 
     //putnbr_dec(123456789, "0123456789");
     return (0);
